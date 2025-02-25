@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="text-center">
+    <h1 class="mb-3">Welcome, {{ current_user.username }}!</h1>
+    <img class="rounded-circle border shadow" 
+         src="{{ url_for('static', filename='profile_pics/' + current_user.profile_image) }}?v={{ current_user.profile_image }}"
+         alt="Profile Picture"
+         style="width: 150px; height: 150px; object-fit: cover;">
+    <p class="text-muted">{{ current_user.email }}</p>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-sm p-4 mt-4">
+        <h3 class="text-center mb-4">Update Profile</h3>
+        <form method="POST" action="" enctype="multipart/form-data">
+          {{ form.hidden_tag() }}
+
+          <div class="mb-3">
+            {{ form.username.label(class="form-label") }}
+            {{ form.username(class="form-control") }}
+          </div>
+
+          <div class="mb-3">
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control") }}
+          </div>
+
+          <div class="mb-3">
+            {{ form.picture.label(class="form-label") }}
+            {{ form.picture(class="form-control") }}
+          </div>
+
+          <div class="d-grid">
+            {{ form.submit(class="btn btn-primary") }}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock content %}
